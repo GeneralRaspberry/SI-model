@@ -13,15 +13,15 @@ beta<-.5
 
   simodeldf<-data.frame(Susceptible=S,Infected=I,Time=t)
   
-  while(I<0.99999){
+  while(I<.9999){
   
   ds<- -beta*I*S
   di<- beta*I*S
   
 
   
-  I<-I + di
-  S <- S + ds
+  I<-round((I + di),4)
+  S <-round((S + ds),4)
   
   
   t<-t+1
@@ -33,3 +33,14 @@ beta<-.5
 tablemelt<-melt(simodeldf,id.vars="Time")
 
 ggplot(tablemelt)+geom_line(aes(x=Time,y=value,group=variable))
+
+
+##############################Testing the integral equation###################################################
+
+inteq<-function(beta,sus,time){
+  
+  I<-exp(beta*sus*time)
+  print(I)
+}
+
+inteq(.5,simodeldf[20,1],simodeldf[20,3])
