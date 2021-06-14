@@ -13,8 +13,7 @@ beta<-.5
 
   simodeldf<-data.frame(Susceptible=S,Infected=I,Time=t)
   
-  while(I<1){
-  if(I<1){
+  while(I<0.99999){
   
   ds<- -beta*I*S
   di<- beta*I*S
@@ -28,10 +27,8 @@ beta<-.5
   t<-t+1
   
   simodeldf<-rbind(simodeldf,data.frame(Susceptible=S,Infected=I,Time=t))
-  } else {
-    break
-  }
-  }
+  } 
+
   
 tablemelt<-melt(simodeldf,id.vars="Time")
 
